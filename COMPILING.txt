@@ -1,0 +1,16 @@
+Pre-compiled binaries for Musical Mood Detector and Visualizer
+were compiled with gcc version 5.3.0 (GCC) on Windows 10
+
+To compile from source, execute the following commands from the
+top musical-mood-detector-and-visualizer direcotry:
+
+
+gcc -Wall -Iinclude -Iinclude\SDL2-2.0.4 -c src\featureExtraction.c -o obj\featureExtraction.o
+
+gcc -Wall -Iinclude -Iinclude\SDL2-2.0.4 -c src\imageDisplay.c -o obj\imageDisplay.o
+
+gcc -Wall -Iinclude -Iinclude\SDL2-2.0.4 -c src\main.c -o obj\main.o
+
+gcc -Wall -Iinclude -Iinclude\SDL2-2.0.4 -c src\moodRecognition.c -o obj\moodRecognition.o
+
+gcc -Wall -Llib -o bin\MMDaV.exe obj\featureExtraction.o obj\imageDisplay.o obj\main.o obj\moodRecognition.o -lportaudio -lfftw3f-3 -lmingw32 -lSDL2main -lSDL2
