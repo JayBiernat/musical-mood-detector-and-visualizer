@@ -362,8 +362,8 @@ int main( int argc, char* argv[] )
     if( err != paNoError )
         goto error;
 
-    SDL_Quit();
     id_clean_imageDisplay_data( &displayData );
+    SDL_Quit();
     mr_clean_mood_detection_data( &moodDetectionData );
     fe_clean_extraction_thread_data( &portAudioData );
     free(input_list_num);
