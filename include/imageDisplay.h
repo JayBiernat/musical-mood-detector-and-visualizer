@@ -151,7 +151,7 @@ void id_updateTexture( id_texture_info *texture,
 
     @param lpArg A pointer cast as LPVOID that points to a id_textureThreadStruct structure
 */
-DWORD WINAPI id_textureUpdateRoutine(LPVOID lpArg);
+unsigned int __stdcall id_textureUpdateRoutine(void *lpArg);
 
 /** @brief Returns the mininum of three floating point arguments */
 float minOfThree( float a, float b, float c );

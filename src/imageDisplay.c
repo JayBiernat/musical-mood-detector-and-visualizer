@@ -30,6 +30,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <process.h>
 #include <math.h>
 #include <SDL.h>
 #include "imageDisplay.h"
@@ -557,7 +558,7 @@ void HSVtoRGB( int *r, int *g, int *b, float h, float s, float v )
 
 /******************************************************************/
 
-DWORD WINAPI id_textureUpdateRoutine(LPVOID lpArg)
+unsigned int __stdcall id_textureUpdateRoutine(void *lpArg)
 {
     id_textureThreadStruct *threadData = (id_textureThreadStruct*)lpArg;
     id_texture_info swapTexture;
@@ -614,5 +615,6 @@ DWORD WINAPI id_textureUpdateRoutine(LPVOID lpArg)
         threadData->updatedTexture = 1;
     }
 
+    _endthreadex( 0 );
 	return 0;
 }

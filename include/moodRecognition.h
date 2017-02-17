@@ -143,6 +143,6 @@ float mr_predict( float *x, mr_model mdl );
 
     @param lpArg A pointer cast as LPVOID that points to a mr_detection_thread_data structure
 */
-DWORD WINAPI MoodDetectionRoutine(LPVOID lpArg);
+unsigned int __stdcall MoodDetectionRoutine(void *lpArg);
 
 #endif // MOODRECOGNITION_H_INCLUDED

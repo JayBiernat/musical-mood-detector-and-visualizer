@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <windows.h>
+#include <process.h>
 #include <math.h>
 #include <string.h>
 #include "moodRecognition.h"
@@ -409,7 +410,7 @@ float mr_predict( float *x, mr_model mdl )
 
 /********************************************************/
 
-DWORD WINAPI MoodDetectionRoutine(LPVOID lpArg)
+unsigned int __stdcall MoodDetectionRoutine(void *lpArg)
 {
     mr_detection_thread_data *threadData = (mr_detection_thread_data*)lpArg;
 
@@ -425,6 +426,7 @@ DWORD WINAPI MoodDetectionRoutine(LPVOID lpArg)
         threadData->valence_prediction = mr_predict( threadData->features, threadData->valence_mdl );
     }
 
+    _endthreadex( 0 );
 	return 0;
 }
 

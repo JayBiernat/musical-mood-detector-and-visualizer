@@ -26,6 +26,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <windows.h>
+#include <process.h>
 
 #include <fftw3.h>
 #include <portaudio.h>
@@ -71,11 +72,11 @@ int main( int argc, char* argv[] )
     textureUpdateData.arousal           = &moodDetectionData.arousal_prediction;
     textureUpdateData.valence           = &moodDetectionData.valence_prediction;
 
-    HANDLE  handle_mood;
-	DWORD   threadId_mood;
+    HANDLE      handle_mood;
+	unsigned    threadId_mood;
 
-	HANDLE  handle_textureUpdate;
-	DWORD   threadId_textureUpdate;
+	HANDLE      handle_textureUpdate;
+	unsigned    threadId_textureUpdate;
 
 	int     i;
 
@@ -255,21 +256,21 @@ int main( int argc, char* argv[] )
         goto error;
 
     /* Start mood detection and texture updating threads */
-    handle_mood = CreateThread( NULL,
-                                0,
-                                MoodDetectionRoutine,
-                                &moodDetectionData,
-                                0,
-                                &threadId_mood );
+    handle_mood = (HANDLE)_beginthreadex( NULL,
+                                          0,
+                                          MoodDetectionRoutine,
+                                          &moodDetectionData,
+                                          0,
+                                          &threadId_mood );
 
-    handle_textureUpdate = CreateThread( NULL,
-                                         0,
-                                         id_textureUpdateRoutine,
-                                         &textureUpdateData,
-                                         0,
-                                         &threadId_textureUpdate );
+    handle_textureUpdate = (HANDLE)_beginthreadex( NULL,
+                                                   0,
+                                                   id_textureUpdateRoutine,
+                                                   &textureUpdateData,
+                                                   0,
+                                                   &threadId_textureUpdate );
 
-    if( ( handle_mood == NULL ) || ( handle_textureUpdate == NULL ) )
+    if( ( handle_mood == 0 ) || ( handle_textureUpdate == 0 ) )
     {
         fprintf( stderr, "Error starting threads\n" );
         printf( "\n\nExiting...\n" );
